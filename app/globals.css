@@ -1,0 +1,75 @@
+@import "tailwindcss";
+
+:root {
+  /* Design tokens — cool paper palette, restrained accents */
+  --paper: #efefea;
+  --paper-dim: #e3e2db;
+  --ink: #17181a;
+  --ink-soft: #55585c;
+  --hairline: #c9c7be;
+  --accent: #2f6f5e;      /* pine/teal — links, highlights */
+  --accent-soft: #dbe6e2;
+  --brick: #b4472a;       /* used sparingly — one or two accents only */
+}
+
+.dark {
+  /* Dark variant — deep warm graphite, not pure black; brighter teal for contrast */
+  --paper: #15171a;
+  --paper-dim: #1d2023;
+  --ink: #ebe9e3;
+  --ink-soft: #9a9d9f;
+  --hairline: #34383b;
+  --accent: #57b79c;
+  --accent-soft: #1d3530;
+  --brick: #d9714f;
+}
+
+@theme inline {
+  --color-paper: var(--paper);
+  --color-paper-dim: var(--paper-dim);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+  --color-hairline: var(--hairline);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --color-brick: var(--brick);
+  --font-display: var(--font-display);
+  --font-body: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  border-color: var(--hairline);
+}
+
+html, body {
+  overflow-x: hidden;
+  max-width: 100%;
+}
+
+body {
+  font-family: var(--font-body), sans-serif;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--paper);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
