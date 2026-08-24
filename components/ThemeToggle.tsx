@@ -19,9 +19,8 @@ export default function ThemeToggle({ className = "" }: { className?: string }) 
 
   useEffect(() => {
     const stored = window.localStorage.getItem("theme") as Theme | null;
-    const initial: Theme =
-      stored ?? (window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light");
-    setTheme(initial);
+    // Default to light unless the person has explicitly chosen dark before.
+    setTheme(stored === "dark" ? "dark" : "light");
   }, []);
 
   const toggle = () => {

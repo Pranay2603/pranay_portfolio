@@ -47,13 +47,14 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         <script
           // Runs before paint to avoid a flash of the wrong theme.
+          // Defaults to light regardless of system preference; only an
+          // explicit choice (stored after using the toggle) turns dark mode on.
           dangerouslySetInnerHTML={{
             __html: `
               (function () {
                 try {
                   var stored = localStorage.getItem('theme');
-                  var dark = stored ? stored === 'dark' : window.matchMedia('(prefers-color-scheme: dark)').matches;
-                  if (dark) document.documentElement.classList.add('dark');
+                  if (stored === 'dark') document.documentElement.classList.add('dark');
                 } catch (e) {}
               })();
             `,
