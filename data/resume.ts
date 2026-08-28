@@ -73,6 +73,21 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    slug: "strata",
+    name: "Strata — Ownership Graph Platform",
+    tagline: "Tracing beneficial ownership through layered shell structures",
+    stack: ["Python", "FastAPI", "CognoDB (Graph DB)", "Groq API", "Docker"],
+    points: [
+      "Compliance analysts had no way to trace who ultimately controls a company through layered shell structures, or catch violations of OFAC's 50%-aggregation rule across indirect holdings.",
+      "Built a graph data model on CognoDB with parameterized multi-hop Cypher traversals to resolve beneficial ownership and flag circular shareholding and shared registered addresses.",
+      "Added a Groq-powered natural-language layer mapping free-text questions to five pre-tested queries; validated by 39 passing tests and live deployment on Render.",
+    ],
+    link: {
+      label: "View on GitHub",
+      href: "https://github.com/Pranay2603/Strata",
+    },
+  },
+  {
     slug: "scam-detection",
     name: "AI Scam Detection System",
     tagline: "Rule-based scam detection with 85% accuracy across text and URLs",
@@ -86,21 +101,6 @@ export const projects: Project[] = [
     link: {
       label: "View on GitHub",
       href: "https://github.com/Pranay2603/scam-detector.git",
-    },
-  },
-  {
-    slug: "quiz-master",
-    name: "Quiz-Master Web Application",
-    tagline: "Role-based quiz platform, selected in an IIT Madras evaluation",
-    stack: ["Python", "Flask", "SQLite", "Jinja2"],
-    points: [
-      "Selected through a two-stage IIT Madras academic evaluation, recognizing the application's technical quality and end-to-end implementation.",
-      "Built a role-based quiz platform with admin and user dashboards, supporting full CRUD operations across subjects, chapters, questions, and quizzes.",
-      "Engineered timed assessments with automated scoring, per-user attempt history, and a normalized 6-table SQLite database.",
-    ],
-    link: {
-      label: "View on GitHub",
-      href: "https://github.com/Pranay2603/Quiz-Master.git",
     },
   },
 ];
@@ -121,6 +121,7 @@ export const stack = {
     "SQLite",
     "Redis",
     "ChromaDB",
+    "CognoDB (Graph DB)",
     "FAISS",
     "FastEmbed",
     "Hugging Face",
