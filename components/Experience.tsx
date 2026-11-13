@@ -8,7 +8,7 @@ export default function Experience() {
       </h2>
 
       {experience.map((job, i) => (
-        <div key={i} className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-3 md:gap-10">
+        <div key={i} className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-3 md:gap-10 mb-10 last:mb-0">
           <div className="font-mono text-[13.5px] text-ink-soft">{job.period}</div>
           <div className="max-w-2xl pb-2">
             <h3 className="font-display text-2xl text-ink">{job.role}</h3>

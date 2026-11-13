@@ -14,7 +14,7 @@ export const person = {
 };
 
 export const summary =
-  "Full stack AI developer working across Python, FastAPI, React, and LangChain — building RAG systems, backend architecture, and shipping them to production under real constraints, not just prototypes.";
+  "Full Stack Developer experienced in building web applications and REST APIs using Python, FastAPI, Flask and React. Skilled in RAG systems, graph databases, backend development and cloud deployment.";
 
 export const education = [
   {
@@ -33,14 +33,24 @@ export const education = [
 
 export const experience = [
   {
+    role: "Frontend Team Lead (Interim)",
+    company: "Zurfte Empowercare Foundation – Vaibez Mobile App",
+    location: "Remote",
+    period: "April 2026 – Aug. 2026",
+    points: [
+      "Led 6 frontend developers on a React Native (Expo) and TypeScript app, tracking 30+ tasks and driving delivery across the onboarding, search, video and notification features.",
+      "Delivered 15 user journeys covering onboarding, search, video uploads and password recovery using React Navigation, Zustand for state management and React Query for data fetching and caching.",
+      "Reviewed pull requests, enforced CI checks (TypeScript, ESLint, Jest) and coordinated backend API integration.",
+    ],
+  },
+  {
     role: "Backend Web Dev Intern",
     company: "Nobel Navigators",
     location: "Washington Blvd — Remote",
     period: "June 2025 – Aug. 2025",
     points: [
-      "Conducted web development sessions for 10+ peers, teaching Python and Flask backend workflows.",
-      "Collaborated on 3+ team projects, contributing to backend development and debugging.",
-      "Delivered 5+ sessions on backend logic, UI structuring, conversational AI, and prompt engineering.",
+      "Mentored 10+ peers in Python and Flask over 5+ sessions, covering backend logic, UI structuring, conversational AI and prompt engineering.",
+      "Contributed to backend development and debugging across 3+ team projects.",
     ],
   },
 ];
@@ -62,9 +72,8 @@ export const projects: Project[] = [
     tagline: "Multi-user AI support platform with document-grounded answers",
     stack: ["Python", "FastAPI", "LangChain", "Groq API", "FAISS", "SQLite"],
     points: [
-      "Built and deployed a multi-user AI support platform on Render using FastAPI, Groq Llama 3.3, and SQLite — with secure authentication, persistent chat history, and an analytics dashboard.",
-      "Developed a PDF-based RAG pipeline using FastEmbed and FAISS, enabling source-aware document question answering with low-latency retrieval.",
-      "Optimized memory usage by replacing PyTorch with FastEmbed, reducing the deployment footprint to fit Render's 512 MB limit while maintaining sub-3s response time.",
+      "Answers sit buried in long PDFs. Built a RAG platform (FastAPI, LangChain, FastEmbed, FAISS) with auth and chat history; swapped PyTorch for FastEmbed to fit Render's 512 MB limit.",
+      "Source-aware PDF answers in under 3 seconds, designed to run as an AI chatbot on company websites.",
     ],
     link: {
       label: "View on GitHub",
@@ -78,9 +87,8 @@ export const projects: Project[] = [
     tagline: "Tracing beneficial ownership through layered shell structures",
     stack: ["Python", "FastAPI", "CognoDB (Graph DB)", "Groq API", "Docker"],
     points: [
-      "Compliance analysts had no way to trace who ultimately controls a company through layered shell structures, or catch violations of OFAC's 50%-aggregation rule across indirect holdings.",
-      "Built a graph data model on CognoDB with parameterized multi-hop Cypher traversals to resolve beneficial ownership and flag circular shareholding and shared registered addresses.",
-      "Added a Groq-powered natural-language layer mapping free-text questions to five pre-tested queries; validated by 39 passing tests and live deployment on Render.",
+      "Layered holdings hide who controls a company and OFAC 50% rule breaches. Built multi-hop Cypher traversals over a graph model, plus a Groq natural language interface over 5 pre-tested queries.",
+      "Surfaces beneficial owners and potential OFAC violations, validated by 39 passing tests.",
     ],
     link: {
       label: "View on GitHub",
@@ -93,10 +101,8 @@ export const projects: Project[] = [
     tagline: "Rule-based scam detection with 85% accuracy across text and URLs",
     stack: ["Python", "Flask", "SQLite", "Google OAuth"],
     points: [
-      "Developed a rule-based scam detection engine with 25+ heuristic checks, achieving 85% detection accuracy across text and URL-based scams.",
-      "Implemented secure authentication with Google OAuth, OTP-based recovery, password hashing, and session management for protected user access.",
-      "Designed a SQLite-backed history module to maintain personalized scam analysis records and user activity tracking.",
-      "Built a risk-scoring dashboard with AI-generated explanations and deployed on Render with secure environment-based configuration.",
+      "Scams are hard to spot on sight. Built a rule-based detector with 25+ heuristic checks (credential harvesting, urgency, impersonation) and URL/domain forensics; secured logins with Google OAuth.",
+      "85% accuracy with explainable risk scoring.",
     ],
     link: {
       label: "View on GitHub",
@@ -106,27 +112,34 @@ export const projects: Project[] = [
 ];
 
 export const stack = {
-  Languages: ["Python", "JavaScript", "TypeScript", "HTML5", "CSS3"],
+  Languages: ["Python", "JavaScript", "TypeScript", "HTML5", "CSS"],
   "Frameworks & Libraries": [
+    "React Native",
+    "Expo",
+    "React",
     "FastAPI",
     "Flask",
-    "React",
+    "Zustand",
+    "React Query",
     "LangChain",
     "LangGraph",
     "Jinja2",
     "SQLAlchemy",
+    "Tailwind CSS",
+    "Vite",
   ],
   "Databases & AI Tools": [
     "PostgreSQL",
     "SQLite",
     "Redis",
     "ChromaDB",
-    "CognoDB (Graph DB)",
     "FAISS",
     "FastEmbed",
     "Hugging Face",
     "Groq API",
     "Google Gemini API",
+    "Neo4j/Cypher",
+    "CognoDB",
   ],
   "Tools & Concepts": [
     "Git",
