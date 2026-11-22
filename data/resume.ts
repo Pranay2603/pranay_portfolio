@@ -39,8 +39,7 @@ export const experience = [
     period: "April 2026 – Aug. 2026",
     points: [
       "Delivered 15 user journeys in a React Native (Expo) and TypeScript app, including onboarding and search and discovery, from a backlog of 30+ tracked tasks.",
-      "Built the video upload flow with progress and retry on failure, modeled as a state machine with unit tests to keep it predictable.",
-      "Used Zustand for client state (auth session, upload state, creator profile) and React Query for server data (home feed, search, notifications) with caching and refetching.",
+      "Built video upload with progress and retry on failure, modeled as a state machine with unit tests; Zustand holds client state and React Query handles server data and caching.",
       "Reviewed 40+ pull requests and blocked merges containing fixtures, QA bypass code and mock data; Expo Doctor caught 15 outdated Expo packages in CI.",
     ],
   },
@@ -74,10 +73,9 @@ export const projects: Project[] = [
     tagline: "Finds who really controls a company through layers of shell entities",
     stack: ["Python", "FastAPI", "React", "TypeScript", "CognoDB (Graph DB)", "openCypher", "Groq API", "Docker"],
     points: [
-      "Walks multi-hop openCypher queries over a graph of 1,115 companies, 489 individuals and about 5,300 relationships (a synthetic dataset) to surface beneficial owners and flag OFAC 50% rule breaches.",
-      "Plain-English questions go through Groq, which only picks one of 5 pre-tested queries. The model never writes Cypher, so it cannot generate a bad one.",
-      "Built for the failure case: a circuit breaker turns a 9,000 ms database timeout into a 2 ms fast failure, a TTL cache absorbs repeat questions, and health endpoints expose the state.",
-      "Moved the app into the database's region, cutting round trips from about 250 ms to 75 ms. Dockerized and covered by 40+ tests.",
+      "Multi-hop openCypher queries over a synthetic graph of 1,115 companies, 489 individuals and about 5,300 relationships surface beneficial owners and flag OFAC 50% rule breaches.",
+      "Groq only picks one of 5 pre-tested queries, so the model never writes Cypher. A circuit breaker turns a 9,000 ms database timeout into a 2 ms fast failure.",
+      "Moving the app into the database's region cut round trips from about 250 ms to 75 ms. Also a TTL cache, health endpoints, Docker and 40+ tests.",
     ],
     link: {
       label: "View on GitHub",
