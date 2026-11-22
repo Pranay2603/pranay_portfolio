@@ -38,9 +38,9 @@ export const experience = [
     location: "Remote",
     period: "April 2026 – Aug. 2026",
     points: [
-      "Delivered 15 user journeys in a React Native (Expo) and TypeScript app, including onboarding and search and discovery, from a backlog of 30+ tracked tasks.",
-      "Built video upload with progress and retry on failure, modeled as a state machine with unit tests; Zustand holds client state and React Query handles server data and caching.",
-      "Reviewed 40+ pull requests and blocked merges containing fixtures, QA bypass code and mock data; Expo Doctor caught 15 outdated Expo packages in CI.",
+      "Delivered 15 user journeys from a backlog of 30+ tracked tasks in a React Native (Expo) and TypeScript app, covering onboarding, search and discovery, video upload and password recovery.",
+      "Designed the video upload flow as a state machine with unit tests, adding progress tracking and retry on failure; kept client state (auth, uploads, profile) in Zustand and server data (feed, search, notifications) in React Query.",
+      "Reviewed 40+ PRs and blocked merges containing fixtures, QA bypass code and mock data; CI checks (TypeScript, ESLint, Jest) and Expo Doctor surfaced 15 outdated Expo packages and a jest-expo mismatch.",
     ],
   },
   {
@@ -49,8 +49,8 @@ export const experience = [
     location: "Washington Blvd — Remote",
     period: "June 2025 – Aug. 2025",
     points: [
-      "Developed and debugged Python and Flask backend logic across 3+ team projects.",
-      "In the final two weeks, mentored 10+ peers over 5+ sessions on Flask, backend logic, conversational AI and prompt engineering.",
+      "Developed and debugged backend logic in Python and Flask across 3+ team projects.",
+      "Coached 10+ peers over 5+ sessions in the final two weeks on Flask, backend logic, conversational AI and prompts.",
     ],
   },
 ];
