@@ -81,7 +81,6 @@ export const projects: Project[] = [
       label: "View on GitHub",
       href: "https://github.com/Pranay2603/Strata",
     },
-    live: { label: "Live demo", href: "https://strata-tsg6.onrender.com" },
     featured: true,
   },
   {
