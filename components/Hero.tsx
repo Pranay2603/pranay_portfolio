@@ -51,7 +51,7 @@ export default function Hero() {
           <dt className="text-ink">Focus</dt>
           <dd>RAG systems, backend architecture</dd>
           <dt className="text-ink">Recent</dt>
-          <dd>Frontend lead (interim), Zurfte</dd>
+          <dd>React Native developer, Zurfte</dd>
           <dt className="text-ink">Studying</dt>
           <dd>Data Science, IIT Madras</dd>
           <dt className="text-ink">Shipped on</dt>

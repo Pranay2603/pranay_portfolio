@@ -33,14 +33,15 @@ export const education = [
 
 export const experience = [
   {
-    role: "Frontend Team Lead (Interim)",
+    role: "React Native Developer",
     company: "Zurfte Empowercare Foundation – Vaibez Mobile App",
     location: "Remote",
     period: "April 2026 – Aug. 2026",
     points: [
-      "Led 6 frontend developers on a React Native (Expo) and TypeScript app, tracking 30+ tasks and driving delivery across the onboarding, search, video and notification features.",
-      "Delivered 15 user journeys covering onboarding, search, video uploads and password recovery using React Navigation, Zustand for state management and React Query for data fetching and caching.",
-      "Reviewed pull requests, enforced CI checks (TypeScript, ESLint, Jest) and coordinated backend API integration.",
+      "Delivered 15 user journeys in a React Native (Expo) and TypeScript app, including onboarding and search and discovery, from a backlog of 30+ tracked tasks.",
+      "Built the video upload flow with progress and retry on failure, modeled as a state machine with unit tests to keep it predictable.",
+      "Used Zustand for client state (auth session, upload state, creator profile) and React Query for server data (home feed, search, notifications) with caching and refetching.",
+      "Reviewed 40+ pull requests and blocked merges containing fixtures, QA bypass code and mock data; Expo Doctor caught 15 outdated Expo packages in CI.",
     ],
   },
   {
@@ -49,8 +50,8 @@ export const experience = [
     location: "Washington Blvd — Remote",
     period: "June 2025 – Aug. 2025",
     points: [
-      "Mentored 10+ peers in Python and Flask over 5+ sessions, covering backend logic, UI structuring, conversational AI and prompt engineering.",
-      "Contributed to backend development and debugging across 3+ team projects.",
+      "Developed and debugged Python and Flask backend logic across 3+ team projects.",
+      "In the final two weeks, mentored 10+ peers over 5+ sessions on Flask, backend logic, conversational AI and prompt engineering.",
     ],
   },
 ];
@@ -62,10 +63,29 @@ export type Project = {
   stack: string[];
   points: string[];
   link: { label: string; href: string };
+  live?: { label: string; href: string };
   featured?: boolean;
 };
 
 export const projects: Project[] = [
+  {
+    slug: "strata",
+    name: "Strata: Ownership Graph Platform",
+    tagline: "Finds who really controls a company through layers of shell entities",
+    stack: ["Python", "FastAPI", "React", "TypeScript", "CognoDB (Graph DB)", "openCypher", "Groq API", "Docker"],
+    points: [
+      "Walks multi-hop openCypher queries over a graph of 1,115 companies, 489 individuals and about 5,300 relationships (a synthetic dataset) to surface beneficial owners and flag OFAC 50% rule breaches.",
+      "Plain-English questions go through Groq, which only picks one of 5 pre-tested queries. The model never writes Cypher, so it cannot generate a bad one.",
+      "Built for the failure case: a circuit breaker turns a 9,000 ms database timeout into a 2 ms fast failure, a TTL cache absorbs repeat questions, and health endpoints expose the state.",
+      "Moved the app into the database's region, cutting round trips from about 250 ms to 75 ms. Dockerized and covered by 40+ tests.",
+    ],
+    link: {
+      label: "View on GitHub",
+      href: "https://github.com/Pranay2603/Strata",
+    },
+    live: { label: "Live demo", href: "https://strata-tsg6.onrender.com" },
+    featured: true,
+  },
   {
     slug: "resolveai",
     name: "ResolveAI Platform",
@@ -80,20 +100,6 @@ export const projects: Project[] = [
       href: "https://github.com/Pranay2603/AI-Support-Copilot.git",
     },
     featured: true,
-  },
-  {
-    slug: "strata",
-    name: "Strata — Ownership Graph Platform",
-    tagline: "Tracing beneficial ownership through layered shell structures",
-    stack: ["Python", "FastAPI", "CognoDB (Graph DB)", "Groq API", "Docker"],
-    points: [
-      "Layered holdings hide who controls a company and OFAC 50% rule breaches. Built multi-hop Cypher traversals over a graph model, plus a Groq natural language interface over 5 pre-tested queries.",
-      "Surfaces beneficial owners and potential OFAC violations, validated by 39 passing tests.",
-    ],
-    link: {
-      label: "View on GitHub",
-      href: "https://github.com/Pranay2603/Strata",
-    },
   },
   {
     slug: "scam-detection",
@@ -193,5 +199,44 @@ export const ragPipeline = [
     label: "Groq Llama 3.3",
     detail:
       "Retrieved passages are passed to Llama 3.3 on Groq to generate a source-aware answer, sub-3s response time.",
+  },
+];
+
+// The request path through Strata. Stage order follows the request; each detail
+// describes what the stage does in the app.
+export const strataFlow = [
+  {
+    id: "ask",
+    label: "Question",
+    detail: "A plain-English question is typed into the React and TypeScript frontend and sent to the FastAPI backend.",
+  },
+  {
+    id: "classify",
+    label: "Groq classifier",
+    detail:
+      "Groq maps the question to one of 5 pre-tested queries and fills in its parameters. It never writes Cypher itself, so the model can only choose from queries that are already known to work.",
+  },
+  {
+    id: "cache",
+    label: "TTL cache",
+    detail: "Repeat questions are answered from a time-limited cache instead of hitting the database again.",
+  },
+  {
+    id: "breaker",
+    label: "Circuit breaker",
+    detail:
+      "If the database stops responding, the breaker opens and requests fail in about 2 ms instead of waiting out a 9,000 ms timeout. Health endpoints report the state.",
+  },
+  {
+    id: "graph",
+    label: "CognoDB graph",
+    detail:
+      "The query runs as multi-hop openCypher over Bolt against the ownership graph. The app sits in the database's region, which cut round trips from about 250 ms to 75 ms.",
+  },
+  {
+    id: "answer",
+    label: "Owners + OFAC",
+    detail:
+      "The result shows the ownership chain to the real beneficial owners and flags holdings that cross the OFAC 50% rule.",
   },
 ];

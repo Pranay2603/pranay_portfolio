@@ -1,19 +1,32 @@
 import type { Project } from "@/data/resume";
 import RagDiagram from "./RagDiagram";
+import StrataFlow from "./StrataFlow";
 
 export default function ProjectFeatured({ project }: { project: Project }) {
   return (
     <article className="py-14 md:py-16 border-b border-hairline">
       <div className="flex items-baseline justify-between gap-4 mb-3">
         <p className="font-mono text-[13px] uppercase tracking-wide text-accent">Featured</p>
-        <a
-          href={project.link.href}
-          target="_blank"
-          rel="noreferrer"
-          className="font-mono text-[13.5px] text-ink-soft hover:text-ink transition-colors whitespace-nowrap"
-        >
-          {project.link.label} →
-        </a>
+        <div className="flex items-baseline gap-5">
+          {project.live && (
+            <a
+              href={project.live.href}
+              target="_blank"
+              rel="noreferrer"
+              className="font-mono text-[13.5px] text-accent hover:text-ink transition-colors whitespace-nowrap"
+            >
+              {project.live.label} ↗
+            </a>
+          )}
+          <a
+            href={project.link.href}
+            target="_blank"
+            rel="noreferrer"
+            className="font-mono text-[13.5px] text-ink-soft hover:text-ink transition-colors whitespace-nowrap"
+          >
+            {project.link.label} →
+          </a>
+        </div>
       </div>
 
       <h3 className="font-display text-3xl md:text-4xl text-ink mb-2">{project.name}</h3>
@@ -39,7 +52,7 @@ export default function ProjectFeatured({ project }: { project: Project }) {
         ))}
       </div>
 
-      <RagDiagram />
+      {project.slug === "strata" ? <StrataFlow /> : <RagDiagram />}
     </article>
   );
 }

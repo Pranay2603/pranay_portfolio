@@ -3,7 +3,7 @@ import ProjectFeatured from "./ProjectFeatured";
 import ProjectCompact from "./ProjectCompact";
 
 export default function Projects() {
-  const featured = projects.find((p) => p.featured);
+  const featured = projects.filter((p) => p.featured);
   const rest = projects.filter((p) => !p.featured);
 
   return (
@@ -12,7 +12,9 @@ export default function Projects() {
         <h2 className="font-mono text-[15px] uppercase tracking-wide text-ink-soft pt-16 md:pt-20 pb-2 border-t border-hairline">
           Work
         </h2>
-        {featured && <ProjectFeatured project={featured} />}
+        {featured.map((p) => (
+          <ProjectFeatured key={p.slug} project={p} />
+        ))}
       </div>
 
       <div className="pt-2">
