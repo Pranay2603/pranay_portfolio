@@ -1,25 +1,23 @@
+import Intro from "@/components/Intro";
+import Ruler from "@/components/Ruler";
 import Nav from "@/components/Nav";
 import Hero from "@/components/Hero";
-import Intro from "@/components/Intro";
-import Projects from "@/components/Projects";
+import Work from "@/components/Work";
 import Experience from "@/components/Experience";
 import Stack from "@/components/Stack";
-import Education from "@/components/Education";
-import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
-export default function Home() {
+export default function Page() {
   return (
     <>
+      <Intro />
+      <Ruler />
       <Nav />
-      <main className="flex-1">
+      <main>
         <Hero />
-        <Intro />
-        <Projects />
+        <Work />
         <Experience />
         <Stack />
-        <Education />
-        <Contact />
       </main>
       <Footer />
     </>

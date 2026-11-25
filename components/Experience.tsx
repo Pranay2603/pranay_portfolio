@@ -1,31 +1,55 @@
-import { experience } from "@/data/resume";
+"use client";
+import { useRef } from "react";
+import { gsap, useGSAP, reduced } from "./gsap";
+import { experience, education } from "@/data/resume";
 
 export default function Experience() {
-  return (
-    <section id="experience" className="scroll-mt-16 mx-auto max-w-6xl px-6 md:px-10 py-16 md:py-20 border-t border-hairline">
-      <h2 className="font-mono text-[15px] uppercase tracking-wide text-ink-soft mb-8">
-        Experience
-      </h2>
+  const root = useRef<HTMLElement>(null);
+  useGSAP(
+    () => {
+      if (reduced()) return;
+      const q = gsap.utils.selector(root);
+      gsap.fromTo(q(".tl-line"), { scaleY: 0 }, {
+        scaleY: 1, ease: "none", transformOrigin: "top",
+        scrollTrigger: { trigger: q(".tl")[0], start: "top 70%", end: "bottom 70%", scrub: 0.4 },
+      });
+      q(".tl-item").forEach((el) =>
+        gsap.from(el, { opacity: 0, y: 40, duration: 0.8, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 82%" } })
+      );
+      q(".edu-row").forEach((el) =>
+        gsap.from(el, { opacity: 0, x: -30, duration: 0.7, ease: "power3.out",
+          scrollTrigger: { trigger: el, start: "top 88%" } })
+      );
+    },
+    { scope: root }
+  );
 
-      {experience.map((job, i) => (
-        <div key={i} className="grid grid-cols-1 md:grid-cols-[180px_1fr] gap-3 md:gap-10 mb-10 last:mb-0">
-          <div className="font-mono text-[13.5px] text-ink-soft">{job.period}</div>
-          <div className="max-w-2xl pb-2">
-            <h3 className="font-display text-2xl text-ink">{job.role}</h3>
-            <p className="text-ink-soft text-[14px] mb-4">
-              {job.company} — {job.location}
-            </p>
-            <ul className="space-y-2.5">
-              {job.points.map((p, j) => (
-                <li key={j} className="flex gap-3 text-[15px] leading-relaxed text-ink">
-                  <span aria-hidden className="text-accent mt-2 h-1 w-1 rounded-full bg-accent shrink-0" />
-                  {p}
-                </li>
-              ))}
-            </ul>
+  return (
+    <section id="experience" ref={root} className="exp">
+      <div className="sec-head"><span>// 02</span><h2>Experience</h2></div>
+      <div className="tl">
+        <div className="tl-line" aria-hidden />
+        {experience.map((e) => (
+          <article key={e.role} className="tl-item">
+            <span className="tl-dot" aria-hidden />
+            <div className="tl-when">{e.period}<small>{e.where}</small></div>
+            <div>
+              <h3>{e.role}</h3>
+              <p className="tl-co">{e.company}</p>
+              <ul>{e.points.map((p) => <li key={p}>{p}</li>)}</ul>
+            </div>
+          </article>
+        ))}
+      </div>
+      <div className="edu">
+        <h3 className="edu-h">Education</h3>
+        {education.map((e) => (
+          <div key={e.school} className="edu-row">
+            <b>{e.school}</b><span>{e.degree}</span><em>{e.period}</em>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </section>
   );
 }

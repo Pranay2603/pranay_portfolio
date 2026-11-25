@@ -1,63 +1,60 @@
+"use client";
+import { useRef } from "react";
+import { gsap, useGSAP, reduced } from "./gsap";
 import { person } from "@/data/resume";
 
 export default function Hero() {
+  const root = useRef<HTMLElement>(null);
+
+  useGSAP(
+    () => {
+      const q = gsap.utils.selector(root);
+      if (reduced()) return;
+      const tl = gsap.timeline({ paused: true });
+      tl.from(q(".h-line > span"), { yPercent: 110, duration: 1.1, ease: "power4.out", stagger: 0.12 })
+        .from(q(".h-fade"), { opacity: 0, y: 16, duration: 0.7, stagger: 0.1, ease: "power2.out" }, 0.5)
+        .from(q(".h-rule"), { scaleX: 0, transformOrigin: "left", duration: 1.2, ease: "power3.inOut" }, 0.3);
+      let played = false;
+      const play = () => { if (!played) { played = true; tl.play(); } };
+      window.addEventListener("intro-leave", play);
+      const t = setTimeout(play, 7500);
+
+      // packets running along the rail
+      const dots = q(".h-dot");
+      dots.forEach((d, i) =>
+        gsap.fromTo(d, { left: "0%" }, { left: "100%", duration: 3.2, repeat: -1, ease: "none", delay: i * 1.05 })
+      );
+      return () => { window.removeEventListener("intro-leave", play); clearTimeout(t); };
+    },
+    { scope: root }
+  );
+
   return (
-    <section id="top" className="relative mx-auto max-w-6xl px-6 md:px-10 pt-16 md:pt-24 pb-20">
-      <div className="grid grid-cols-1 md:grid-cols-[1fr_auto] gap-10 items-end">
-        <div className="min-w-0">
-          <p className="font-mono text-[15px] tracking-wide text-accent mb-6">
-            {person.role} — based in {person.location}
-          </p>
-          <h1 className="font-display text-[13vw] leading-[0.95] md:text-[5.5rem] md:leading-[0.95] tracking-tight text-ink">
-            Retrieval, auth,
-            <br />
-            and everything <em className="not-italic text-accent">between.</em>
-          </h1>
-          <p className="mt-8 max-w-xl text-[17px] leading-relaxed text-ink-soft">
-            I build backend systems and RAG pipelines that have to actually run —
-            in production, under memory limits, with real users hitting them.
-            Python and FastAPI on the server, LangChain where retrieval is involved,
-            React on the front.
-          </p>
-
-          <div className="mt-9 flex flex-wrap items-center gap-4">
-            <a
-              href="#work"
-              className="rounded-full bg-ink text-paper px-6 py-3 text-sm font-medium hover:bg-accent transition-colors"
-            >
-              See the work
-            </a>
-            <a
-              href={person.github}
-              target="_blank"
-              rel="noreferrer"
-              className="font-mono text-sm text-ink-soft hover:text-ink transition-colors underline decoration-hairline underline-offset-4 break-all"
-            >
-              {person.githubLabel}
-            </a>
-            <a
-              href={person.linkedin}
-              target="_blank"
-              rel="noreferrer"
-              className="font-mono text-sm text-ink-soft hover:text-ink transition-colors underline decoration-hairline underline-offset-4"
-            >
-              LinkedIn
-            </a>
-          </div>
-        </div>
-
-        {/* Metadata block — real facts, no decoration */}
-        <dl className="hidden md:grid grid-cols-[auto_1fr] gap-x-4 gap-y-2.5 font-mono text-[14px] text-ink-soft border-l border-hairline pl-6 pb-1 min-w-[240px]">
-          <dt className="text-ink">Focus</dt>
-          <dd>RAG systems, backend architecture</dd>
-          <dt className="text-ink">Recent</dt>
-          <dd>React Native developer, Zurfte</dd>
-          <dt className="text-ink">Studying</dt>
-          <dd>Data Science, IIT Madras</dd>
-          <dt className="text-ink">Shipped on</dt>
-          <dd>Render, 512MB constraint</dd>
-        </dl>
+    <header id="top" ref={root} className="hero">
+      <div className="hero-top h-fade">
+        <span>{person.role}</span>
+        <span>Available for roles · India</span>
       </div>
-    </section>
+
+      <h1 className="hero-title" aria-label="Software engineer">
+        <span className="h-line"><span>&lt;SOFTWARE</span></span>
+        <span className="h-line"><span>ENGINEER /&gt;</span></span>
+      </h1>
+
+      <div className="hero-rail">
+        <div className="h-rule" />
+        <i className="h-dot" /><i className="h-dot" /><i className="h-dot" />
+      </div>
+
+      <div className="hero-bottom">
+        <p className="hero-lede h-fade">
+          I build software end to end: mobile and web frontends, the APIs behind them, and the data layer
+          underneath. My latest, Tilt, serves 3,300+ requests a second, and I can prove none were lost.</p>
+        <div className="hero-meta h-fade">
+          <a href="#work">See the systems ↓</a>
+          <a href={person.github} target="_blank" rel="noreferrer">GitHub ↗</a>
+        </div>
+      </div>
+    </header>
   );
 }
